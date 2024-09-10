@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Janelle!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFD700, #FF69B4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .card {
+            width: 400px;
+            height: 300px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .card h1 {
+            font-size: 2.5em;
+            color: #FF1493;
+        }
+        .card p {
+            font-size: 1.5em;
+            color: #333;
+        }
+        .open-btn {
+            background-color: #FF1493;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .balloons {
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 300px;
+        }
+        .balloon {
+            width: 40px;
+            height: 60px;
+            border-radius: 50% 50% 0 0;
+            background-color: red;
+            position: relative;
+        }
+        .balloon::before {
+            content: '';
+            width: 2px;
+            height: 30px;
+            background-color: black;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .balloon:nth-child(2) {
+            background-color: yellow;
+        }
+        .balloon:nth-child(3) {
+            background-color: blue;
+        }
+        .confetti {
+            width: 10px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+            animation: fall 2s infinite;
+        }
+        .confetti:nth-child(2) {
+            background-color: yellow;
+        }
+        .confetti:nth-child(3) {
+            background-color: blue;
+        }
+        @keyframes fall {
+            0% { top: -100px; }
+            100% { top: 100vh; }
+        }
+        @keyframes riseUp {
+            0% { bottom: -200px; }
+            100% { bottom: 120%; }
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Confetti Elements -->
+    <div class="confetti" style="left: 20%;"></div>
+    <div class="confetti" style="left: 40%;"></div>
+    <div class="confetti" style="left: 60%;"></div>
+
+    <!-- Greeting Card -->
+    <div class="card" id="greeting-card">
+        <h1>Happy Birthday, Janelle!</h1>
+        <p>Hi! Hello! Mabuhay! Goodluck sa life, college, and relationships hihihi</p>
+        <p>Wishing you the best!!!</p>
+    </div>
+
+    <!-- Balloons -->
+    <div class="balloons hidden" id="balloons">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+    </div>
+
+    <!-- Open Button -->
+    <button class="open-btn" id="open-card-btn">Open Greeting Card</button>
+
+    <script>
+        document.getElementById('open-card-btn').addEventListener('click', function() {
+            // Show the greeting card and balloons
+            document.getElementById('greeting-card').style.display = 'block';
+            document.getElementById('balloons').classList.remove('hidden');
+            
+            // Animate the balloons to fly up
+            const balloons = document.querySelectorAll('.balloon');
+            balloons.forEach((balloon, index) => {
+                balloon.style.animation = `riseUp 3s ease ${index * 0.5}s forwards`;
+            });
+            
+            // Trigger confetti fall
+            const confetti = document.querySelectorAll('.confetti');
+            confetti.forEach((piece, index) => {
+                piece.style.animationDelay = `${index * 0.3}s`;
+            });
+
+            // Hide the open button
+            this.style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>
